@@ -183,6 +183,17 @@ body.wm-open{overflow:hidden}
 .st-job li b{display:block;color:var(--fg);font-size:14px}
 @media (max-width:1000px){.st-top{grid-template-columns:1fr}.st-cards{grid-template-columns:1fr}.st-job ul{grid-template-columns:1fr}}
 @media (max-width:560px){.st-catch{margin-left:0}.coco{padding:24px}.st-job{padding:20px}}
+/* About layout v2: tags under the heading, photo on its own */
+.about-tags{list-style:none;margin:22px 0 0 22px;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.about-tags li{background:#fff;border:1px solid var(--line);border-radius:12px;padding:9px 16px;font-size:14px;font-weight:700;box-shadow:0 6px 16px rgba(30,70,160,.06)}
+.about-visual::before{display:none}
+.about-visual{justify-content:center}
+.photo{margin-right:0;width:min(360px,100%)}
+@media (max-width:560px){.about-tags{margin-left:0}}
+/* Name plate below the photo instead of over the face */
+.about-visual .photo{aspect-ratio:auto;background:#fff;animation:none}
+.about-visual .photo img{position:static;display:block;width:100%;height:auto;aspect-ratio:4/5}
+.about-visual .nameplate{position:static;border-radius:0;background:#fff;backdrop-filter:none;-webkit-backdrop-filter:none;padding:14px 20px 16px}
 /* Process */
 .pr-lead{display:grid;grid-template-columns:auto 1fr;gap:20px 48px;align-items:center;margin:26px 0 0 22px}
 .pr-catch{margin:0;font-size:clamp(22px,2.6vw,32px);font-weight:900;line-height:1.5;letter-spacing:.02em}
@@ -581,15 +592,15 @@ footer .menu{gap:28px;font-size:13px}
     <div>
       <div class="sh"><div class="bar"></div><div><div class="en">About Me</div><h2>現場の課題を、<br>ITで解決するエンジニア</h2></div></div>
       <p>業務効率化・DX推進を通じて、<br>人とテクノロジーの架け橋となることを目指しています。<br>一つひとつの開発で、より良い未来を創ります。</p>
+      <ul class="about-tags">
+        <li class="chk"><i></i>業務効率化</li><li class="chk"><i></i>AI活用</li><li class="chk"><i></i>DX推進</li><li class="chk"><i></i>フルスタック開発</li><li class="chk"><i></i>講師</li>
+      </ul>
     </div>
     <div class="about-visual">
       <div class="photo" id="photo">
         <img src="img/me.jpg" alt="満尾 和博の写真" width="800" height="1000" loading="lazy">
         <div class="nameplate"><b>満尾 和博 <small>Mitsuo Kazuhiro</small></b><span>AI × 業務効率化エンジニア</span></div>
       </div>
-      <div class="glass"><ul>
-        <li class="chk"><i></i>業務効率化</li><li class="chk"><i></i>AI活用</li><li class="chk"><i></i>DX推進</li><li class="chk"><i></i>フルスタック開発</li><li class="chk"><i></i>講師</li>
-      </ul></div>
     </div>
   </div>
 </div></section>
