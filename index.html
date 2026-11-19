@@ -239,16 +239,16 @@ body.wm-open{overflow:hidden}
 @keyframes beam{from{background-position:-60% 0}to{background-position:160% 0}}
 
 .sh{display:flex;gap:18px;align-items:flex-start}
-.sh .bar{width:4px;height:58px;margin-top:6px;border-radius:4px;background:linear-gradient(var(--cyan),var(--blue));transform:skewX(-14deg)}
+.sh .bar{width:4px;align-self:stretch;min-height:52px;margin:4px 0;border-radius:4px;background:linear-gradient(var(--cyan),var(--blue))}
 .sh .en{font-family:var(--en);font-weight:600;color:var(--blue);font-size:17px;letter-spacing:.03em}
-.sh h2{margin:2px 0 0;font-size:clamp(20px,2.4vw,30px);font-weight:900;line-height:1.5;font-style:italic;letter-spacing:.02em}
+.sh h2{margin:2px 0 0;font-size:clamp(20px,2.4vw,30px);font-weight:900;line-height:1.5;letter-spacing:.02em}
 
 /* ABOUT */
 .about{display:grid;grid-template-columns:1fr 1.15fr;gap:28px;align-items:center}
 .about p{color:var(--dim);margin:18px 0 0 22px;font-size:14px}
 .about-art{position:relative;border-radius:22px;overflow:hidden;min-height:270px;box-shadow:0 24px 60px rgba(30,70,160,.18)}
 .about-art img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;animation:kb 20s ease-in-out infinite alternate;filter:brightness(1.08)}
-.glass{position:absolute;left:5%;top:50%;transform:translateY(-50%) skewX(-6deg);z-index:2;padding:18px 26px;border-radius:14px;color:var(--fg);
+.glass{position:absolute;left:5%;top:50%;transform:translateY(-50%);z-index:2;padding:18px 26px;border-radius:14px;color:var(--fg);
   background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.95);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 14px 40px rgba(20,50,120,.22)}
 .glass ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-weight:700;font-size:15px}
 .chk{display:flex;gap:12px;align-items:center}
@@ -276,7 +276,7 @@ body.wm-open{overflow:hidden}
 .nameplate b{font-size:18px;font-weight:900;letter-spacing:.06em}
 .nameplate b small{font-family:var(--en);font-size:12px;font-weight:600;letter-spacing:.02em;color:var(--blue);margin-left:6px}
 .nameplate span{font-size:12px;color:var(--dim)}
-.about-visual .glass{left:0;top:auto;bottom:16%;transform:skewX(-6deg)}
+.about-visual .glass{left:0;top:auto;bottom:16%;transform:none}
 @media (max-width:560px){.about-visual{flex-direction:column;align-items:center;gap:16px}.about-visual .glass{position:relative;bottom:auto;transform:none}.photo{margin-right:0}}
 /* SKILLS */
 .skills{display:grid;grid-template-columns:1fr 260px 200px;gap:24px;align-items:center;margin-top:34px}
