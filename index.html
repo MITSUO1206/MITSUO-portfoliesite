@@ -152,7 +152,8 @@ nav .menu{padding:6px 26px;border-radius:99px;background:rgba(255,255,255,.72);b
 .ph-change{position:absolute;top:14px;right:14px;z-index:3;font:700 12px var(--jp);padding:7px 12px;border-radius:99px;border:0;background:rgba(255,255,255,.85);color:var(--fg);cursor:pointer;backdrop-filter:blur(8px);opacity:0;transition:.3s}
 .photo:hover .ph-change,.ph-change:focus-visible{opacity:1}
 .nameplate{position:absolute;left:14px;right:14px;bottom:14px;z-index:2;padding:12px 16px;border-radius:16px;background:rgba(255,255,255,.78);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:flex;flex-direction:column;line-height:1.5}
-.nameplate b{font-family:var(--en);font-size:17px}
+.nameplate b{font-size:18px;font-weight:900;letter-spacing:.06em}
+.nameplate b small{font-family:var(--en);font-size:12px;font-weight:600;letter-spacing:.02em;color:var(--blue);margin-left:6px}
 .nameplate span{font-size:12px;color:var(--dim)}
 .about-visual .glass{left:0;top:auto;bottom:16%;transform:skewX(-6deg)}
 @media (max-width:560px){.about-visual{flex-direction:column;align-items:center;gap:16px}.about-visual .glass{position:relative;bottom:auto;transform:none}.photo{margin-right:0}}
@@ -231,14 +232,21 @@ nav .menu{padding:6px 26px;border-radius:99px;background:rgba(255,255,255,.72);b
 .slider .cards.at-end{-webkit-mask-image:none;mask-image:none}
 .slider .card{flex:0 0 clamp(240px,24%,290px);scroll-snap-align:start}
 .slider .cards.dragging .card{pointer-events:none}
-.nav-arrow{position:absolute;top:-62px;z-index:3;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--fg);font-size:18px;cursor:pointer;box-shadow:0 8px 20px rgba(30,70,160,.12);transition:.25s}
-.nav-arrow.prev{right:56px}.nav-arrow.next{right:0}
-.nav-arrow:hover:not([disabled]){background:var(--blue);color:#fff;border-color:var(--blue);transform:translateY(-2px)}
+.nav-arrow{position:absolute;top:-70px;z-index:3;width:56px;height:56px;border-radius:50%;border:0;background:linear-gradient(135deg,var(--blue),var(--violet));color:#fff;font-size:22px;font-weight:700;cursor:pointer;box-shadow:0 10px 26px rgba(47,107,255,.4);transition:.25s}
+.nav-arrow.prev{right:70px;background:#fff;color:var(--blue);box-shadow:0 0 0 2px var(--blue) inset,0 8px 20px rgba(30,70,160,.12)}.nav-arrow.next{right:0}
+.nav-arrow.next:not([disabled]){animation:nudge 1.8s ease-in-out infinite}
+.nav-arrow.next:not([disabled])::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--blue);opacity:0;animation:ping 1.8s ease-out infinite}
+@keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
+@keyframes ping{0%{transform:scale(.9);opacity:.6}100%{transform:scale(1.35);opacity:0}}
+.slide-hint{position:absolute;top:-56px;right:150px;font-size:12px;font-weight:700;color:var(--blue);white-space:nowrap}
+.nav-arrow:hover:not([disabled]){transform:scale(1.08);animation:none}
+.nav-arrow.prev:hover:not([disabled]){background:var(--blue);color:#fff}
 .nav-arrow[disabled]{opacity:.35;cursor:default}
 .nav-arrow:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 .progress{height:3px;border-radius:3px;background:var(--line);overflow:hidden;max-width:320px}
 .progress span{display:block;height:100%;width:20%;border-radius:3px;background:linear-gradient(90deg,var(--cyan),var(--blue));transition:transform .2s,width .2s}
-@media (max-width:560px){.slider .card{flex-basis:80%}.nav-arrow{display:none}}
+@media (max-width:760px){.slide-hint{position:static;display:block;margin-bottom:8px}}
+@media (max-width:560px){.slider .card{flex-basis:80%}.nav-arrow{display:none}.slide-hint::after{content:" →"}}
 /* SERVICE */
 .service{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:24px;align-items:center}
 .service p{color:var(--dim);font-size:14px;margin:16px 0 18px 22px}
@@ -334,6 +342,7 @@ footer .menu{gap:28px;font-size:13px}
       <button type="button" data-f="ai web">Webアプリ・AI <i>4</i></button>
     </div>
     <div class="slider">
+      <span class="slide-hint" id="wHint">横にスライドして他の実績も見る</span>
       <button type="button" class="nav-arrow prev" id="wPrev" aria-label="前の実績へ">←</button>
       <button type="button" class="nav-arrow next" id="wNext" aria-label="次の実績へ">→</button>
     <div class="cards" id="cards">
@@ -403,7 +412,7 @@ footer .menu{gap:28px;font-size:13px}
     </div>
     <div class="about-visual">
       <div class="photo" id="photo">
-        <img id="photoImg" src="img/me.jpg" alt="Mitsuo Kazuhiroの写真" hidden>
+        <img id="photoImg" src="img/me.jpg" alt="満尾 和博の写真" hidden>
         <label class="ph-empty" for="photoInput" id="phEmpty">
           <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="24" r="12"/><path d="M10 58c2-12 11-19 22-19s20 7 22 19"/></svg>
           <b>ここにあなたの写真</b>
@@ -411,7 +420,7 @@ footer .menu{gap:28px;font-size:13px}
         </label>
         <input type="file" id="photoInput" accept="image/*" hidden>
         <button type="button" class="ph-change" id="phChange" hidden>写真を変更</button>
-        <div class="nameplate"><b>Mitsuo Kazuhiro</b><span>AI × 業務効率化エンジニア</span></div>
+        <div class="nameplate"><b>満尾 和博 <small>Mitsuo Kazuhiro</small></b><span>AI × 業務効率化エンジニア</span></div>
       </div>
       <div class="glass"><ul>
         <li class="chk"><i></i>業務効率化</li><li class="chk"><i></i>AI活用</li><li class="chk"><i></i>DX推進</li><li class="chk"><i></i>フルスタック開発</li>
