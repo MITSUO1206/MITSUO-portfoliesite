@@ -11,16 +11,16 @@ Excel VBA・GAS・生成AIで現場の業務を効率化するエンジニアの
 | `img/hero.jpg` | ファーストビューのイラスト |
 | `img/about.jpg` | About の背景イラスト |
 | `img/me.jpg` | About に表示するプロフィール写真 |
-| `gas/Code.gs` | お問い合わせをスプレッドシートに記録する Apps Script |
 
 ## 公開前にやること
 
 ### 1. お問い合わせフォームの送信先を設定する
-フォームの内容は Google スプレッドシート「ポートフォリオ お問い合わせ一覧」に1行ずつ追加されます。受け口は Google Apps Script（`gas/Code.gs`）です。
+フォームの内容は [FormSubmit](https://formsubmit.co/) 経由で Gmail に届きます。
 
-1. スプレッドシートを開き、拡張機能 → Apps Script に `gas/Code.gs` の内容を貼り付けて保存
-2. デプロイ → 新しいデプロイ → 種類「ウェブアプリ」、実行ユーザー「自分」、アクセス「全員」でデプロイ
-3. 表示された URL を `index.html` の `const GAS_URL='YOUR_GAS_WEB_APP_URL';` に設定
+1. FormSubmit から届く「Activate Form」メールのリンクを押して有効化する
+2. 有効化後に表示されるランダムな文字列（メールアドレスの代わりに使える ID）を、`index.html` の `const FORM_ID='YOUR_FORMSUBMIT_ID';` に設定する
+
+ページには ID だけを書くので、メールアドレスは公開されません。
 
 ## ローカルで確認する
 
