@@ -188,7 +188,7 @@ nav .menu{padding:6px 26px;border-radius:99px;background:rgba(255,255,255,.72);b
 .about-visual::before{content:"";position:absolute;right:8%;top:6%;width:70%;height:88%;border-radius:32px;background:url(img/about.jpg) center/cover;filter:blur(2px) brightness(1.15) saturate(1.1);opacity:.35;transform:rotate(-4deg)}
 .photo{position:relative;width:min(380px,100%);aspect-ratio:4/5;border-radius:28px;overflow:hidden;background:linear-gradient(160deg,#FFFFFF,#E3EEFF);box-shadow:0 30px 70px rgba(30,70,160,.22);isolation:isolate;margin-right:4%;animation:float 7s ease-in-out infinite}
 .photo::after{content:"";position:absolute;inset:0;border-radius:28px;padding:2px;pointer-events:none;background:conic-gradient(from var(--a,0deg),var(--cyan),var(--blue),var(--violet),var(--cyan));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:border 6s linear infinite}
-.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%}
 .photo [hidden]{display:none!important}
 .ph-empty{position:absolute;inset:14px;border:2px dashed rgba(47,107,255,.35);border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;cursor:pointer;color:var(--dim);transition:.3s;padding:16px}
 .ph-empty svg{width:84px;height:84px;fill:none;stroke:rgba(47,107,255,.5);stroke-width:2.5;margin-bottom:6px}
@@ -474,14 +474,7 @@ footer .menu{gap:28px;font-size:13px}
     </div>
     <div class="about-visual">
       <div class="photo" id="photo">
-        <img id="photoImg" src="img/me.jpg" alt="満尾 和博の写真" hidden>
-        <label class="ph-empty" for="photoInput" id="phEmpty">
-          <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="24" r="12"/><path d="M10 58c2-12 11-19 22-19s20 7 22 19"/></svg>
-          <b>ここにあなたの写真</b>
-          <span>クリックで選ぶか、ドラッグ＆ドロップ</span>
-        </label>
-        <input type="file" id="photoInput" accept="image/*" hidden>
-        <button type="button" class="ph-change" id="phChange" hidden>写真を変更</button>
+        <img src="img/me.jpg" alt="満尾 和博の写真" width="800" height="1000" loading="lazy">
         <div class="nameplate"><b>満尾 和博 <small>Mitsuo Kazuhiro</small></b><span>AI × 業務効率化エンジニア</span></div>
       </div>
       <div class="glass"><ul>
@@ -507,6 +500,7 @@ footer .menu{gap:28px;font-size:13px}
       <div class="qf"><label for="f-topic">ご相談の種類</label>
         <select id="f-topic" name="topic"><option>業務の自動化・効率化</option><option>業務システムの開発・改修</option><option>AI導入のご相談</option><option>その他</option></select></div>
       <div class="qf"><label for="f-msg">ご相談内容<em>必須</em></label><textarea id="f-msg" name="message" rows="3" required placeholder="例：Excelで管理している発注業務を自動化したい"></textarea></div>
+      <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
       <button class="btn qf-send" type="submit" id="f-send">送信する <span class="ar">→</span></button>
       <p class="qf-msg" id="f-status" role="status" aria-live="polite"></p>
     </form>
@@ -559,36 +553,22 @@ setTimeout(()=>document.querySelectorAll('.rv').forEach(el=>el.classList.add('in
 if(!reduce)document.querySelectorAll('.card').forEach(c=>{c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect(),px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;
   c.style.transform=`translateY(-8px) perspective(700px) rotateY(${px*8}deg) rotateX(${-py*8}deg)`});c.addEventListener('pointerleave',()=>c.style.transform='')});
 
-/* About photo: real file at img/me.jpg, or a local preview the viewer picks */
-(function(){const img=document.getElementById('photoImg'),empty=document.getElementById('phEmpty'),inp=document.getElementById('photoInput'),chg=document.getElementById('phChange'),box=document.getElementById('photo');
-  const show=src=>{img.src=src;img.hidden=false;empty.hidden=true;chg.hidden=false;};
-  img.addEventListener('load',()=>{img.hidden=false;empty.hidden=true;chg.hidden=false;},{once:true});
-  try{const saved=localStorage.getItem('aboutPhoto');if(saved)show(saved);}catch(e){}
-  function take(file){if(!file||!file.type.startsWith('image/'))return;const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{
-      const k=Math.min(1,900/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*k;c.height=im.height*k;c.getContext('2d').drawImage(im,0,0,c.width,c.height);
-      const url=c.toDataURL('image/jpeg',.88);show(url);try{localStorage.setItem('aboutPhoto',url)}catch(e){}};im.src=r.result;};r.readAsDataURL(file);}
-  inp.addEventListener('change',()=>take(inp.files[0]));chg.addEventListener('click',()=>inp.click());
-  ['dragenter','dragover'].forEach(t=>box.addEventListener(t,e=>{e.preventDefault();box.classList.add('drag')}));
-  ['dragleave','drop'].forEach(t=>box.addEventListener(t,e=>{e.preventDefault();box.classList.remove('drag')}));
-  box.addEventListener('drop',e=>take(e.dataTransfer.files[0]));
-})();
 
-/* Inquiry form. Delivery goes through Web3Forms: put the access key issued for the
-   receiving address in FORM_KEY (the address itself never appears in the page). */
-(function(){const FORM_KEY='YOUR_WEB3FORMS_ACCESS_KEY';
+/* Inquiry form: posts to a Google Apps Script web app that appends a row to the
+   inquiry spreadsheet and sends a notification email (see gas/Code.gs). */
+(function(){const GAS_URL='YOUR_GAS_WEB_APP_URL';
   const f=document.getElementById('contact'),st=document.getElementById('f-status'),btn=document.getElementById('f-send');
   const say=(t,c)=>{st.textContent=t;st.className='qf-msg '+(c||'');};
   f.addEventListener('submit',async e=>{e.preventDefault();
+    if(f.website&&f.website.value)return; /* honeypot */
     const req=['f-name','f-email','f-msg'].map(id=>document.getElementById(id));let ok=true;
     req.forEach(el=>{const bad=!el.value.trim()||(el.type==='email'&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(el.value));el.classList.toggle('bad',bad);if(bad)ok=false;});
     if(!ok){say('未入力の項目か、メールアドレスの形式を確認してください。','err');return;}
-    const d=Object.fromEntries(new FormData(f));
-    if(FORM_KEY.startsWith('YOUR_')){say('このページはプレビューのため送信されません。公開版では送信先のメールに届きます。','err');return;}
+    if(GAS_URL.startsWith('YOUR_')){say('送信先がまだ設定されていません。','err');return;}
     btn.disabled=true;say('送信しています…');
-    try{const r=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},
-        body:JSON.stringify({access_key:FORM_KEY,subject:'【ポートフォリオ】'+d.topic+'（'+d.name+' 様）',from_name:'Mitsuo Kazuhiro Portfolio',name:d.name,company:d.company,email:d.email,topic:d.topic,message:d.message})});
-      const j=await r.json().catch(()=>({}));
-      if(r.ok&&j.success!==false){f.reset();say('送信しました。内容を確認のうえ、ご返信します。','ok');}else throw 0;
+    try{const body=new URLSearchParams(new FormData(f));
+      await fetch(GAS_URL,{method:'POST',mode:'no-cors',body});
+      f.reset();say('送信しました。内容を確認のうえ、ご返信します。','ok');
     }catch(_){say('送信できませんでした。時間をおいてもう一度お試しください。','err');}
     finally{btn.disabled=false;}
   });

@@ -10,22 +10,19 @@ Excel VBA・GAS・生成AIで現場の業務を効率化するエンジニアの
 | `index.html` | ページ本体（HTML・CSS・JavaScript を1ファイルにまとめています） |
 | `img/hero.jpg` | ファーストビューのイラスト |
 | `img/about.jpg` | About の背景イラスト |
-| `img/me.jpg` | About に表示するご本人の写真（**未配置**。置くと自動で表示されます） |
+| `img/me.jpg` | About に表示するプロフィール写真 |
+| `gas/Code.gs` | お問い合わせをスプレッドシートに記録し、通知メールを送る Apps Script |
 
 ## 公開前にやること
 
-### 1. プロフィール写真を置く
-`img/me.jpg` に写真を置きます。縦長（4:5）・胸から上・明るめの背景がおすすめです。
+### 1. お問い合わせフォームの送信先を設定する
+フォームの内容は Google スプレッドシート「ポートフォリオ お問い合わせ一覧」に1行ずつ追加され、同時に通知メールが届きます。受け口は Google Apps Script（`gas/Code.gs`）です。
 
-### 2. お問い合わせフォームの送信先を設定する
-フォームは [Web3Forms](https://web3forms.com/) 経由でメールを送ります。
+1. スプレッドシートを開き、拡張機能 → Apps Script に `gas/Code.gs` の内容を貼り付けて保存
+2. デプロイ → 新しいデプロイ → 種類「ウェブアプリ」、実行ユーザー「自分」、アクセス「全員」でデプロイ
+3. 表示された URL を `index.html` の `const GAS_URL='YOUR_GAS_WEB_APP_URL';` に設定
 
-1. Web3Forms で受信用のメールアドレスを入力し、アクセスキーを受け取る
-2. `index.html` の `const FORM_KEY='YOUR_WEB3FORMS_ACCESS_KEY';` をそのキーに書き換える
-
-メールアドレスはページに書かず、アクセスキーだけを置く仕組みです。
-
-### 3. SNS のリンクを入れる
+### 2. SNS のリンクを入れる
 フッターの GitHub・LinkedIn・X のリンクは `href="#"` のままです。使うものだけ URL を入れ、使わないものは削除してください。
 
 ## ローカルで確認する
