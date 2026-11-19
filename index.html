@@ -555,7 +555,7 @@ if(!reduce)document.querySelectorAll('.card').forEach(c=>{c.addEventListener('po
 
 
 /* Inquiry form: posts to a Google Apps Script web app that appends a row to the
-   inquiry spreadsheet and sends a notification email (see gas/Code.gs). */
+   inquiry spreadsheet (see gas/Code.gs). */
 (function(){const GAS_URL='YOUR_GAS_WEB_APP_URL';
   const f=document.getElementById('contact'),st=document.getElementById('f-status'),btn=document.getElementById('f-send');
   const say=(t,c)=>{st.textContent=t;st.className='qf-msg '+(c||'');};
