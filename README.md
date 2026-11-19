@@ -14,13 +14,8 @@ Excel VBA・GAS・生成AIで現場の業務を効率化するエンジニアの
 
 ## 公開前にやること
 
-### 1. お問い合わせフォームの送信先を設定する
-フォームの内容は [FormSubmit](https://formsubmit.co/) 経由で Gmail に届きます。
-
-1. FormSubmit から届く「Activate Form」メールのリンクを押して有効化する
-2. 有効化後に表示されるランダムな文字列（メールアドレスの代わりに使える ID）を、`index.html` の `const FORM_ID='YOUR_FORMSUBMIT_ID';` に設定する
-
-ページには ID だけを書くので、メールアドレスは公開されません。
+### 1. お問い合わせフォーム
+フォームの内容は [Web3Forms](https://web3forms.com/) 経由で Gmail に届きます。`index.html` の `ACCESS_KEY` に Web3Forms のアクセスキーを設定済みです（アクセスキーは公開して使う前提のもので、受信先のメールアドレスはページに含まれません）。
 
 ## ローカルで確認する
 

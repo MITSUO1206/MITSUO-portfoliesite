@@ -696,7 +696,7 @@ footer .menu{gap:28px;font-size:13px}
       <div class="qf"><label for="f-topic">ご相談の種類</label>
         <select id="f-topic" name="topic"><option>業務の自動化・効率化</option><option>業務システムの開発・改修</option><option>AI導入のご相談</option><option>その他</option></select></div>
       <div class="qf"><label for="f-msg">ご相談内容<em>必須</em></label><textarea id="f-msg" name="message" rows="3" required placeholder="例：Excelで管理している発注業務を自動化したい"></textarea></div>
-      <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+      <input type="checkbox" name="botcheck" tabindex="-1" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
       <button class="btn qf-send" type="submit" id="f-send">送信する <span class="ar">→</span></button>
       <p class="qf-msg" id="f-status" role="status" aria-live="polite"></p>
     </form>
@@ -763,25 +763,24 @@ if(!reduce)document.querySelectorAll('.card').forEach(c=>{c.addEventListener('po
   c.style.transform=`translateY(-8px) perspective(700px) rotateY(${px*8}deg) rotateX(${-py*8}deg)`});c.addEventListener('pointerleave',()=>c.style.transform='')});
 
 
-/* Inquiry form: delivered to Gmail through FormSubmit (https://formsubmit.co).
-   FORM_ID is the random alias FormSubmit issues for the receiving address,
-   so the address itself never appears in the page. */
-(function(){const FORM_ID='YOUR_FORMSUBMIT_ID';
+/* Inquiry form: delivered to Gmail through Web3Forms (https://web3forms.com).
+   The access key is meant to be public; the receiving address is stored at Web3Forms,
+   so it never appears in the page. */
+(function(){const ACCESS_KEY='df6d78a6-bc7b-42e0-bc59-d571bfc17751';
   const f=document.getElementById('contact'),st=document.getElementById('f-status'),btn=document.getElementById('f-send');
   const say=(t,c)=>{st.textContent=t;st.className='qf-msg '+(c||'');};
   f.addEventListener('submit',async e=>{e.preventDefault();
-    if(f._honey&&f._honey.value)return; /* honeypot */
+    if(f.botcheck&&f.botcheck.checked)return; /* honeypot */
     const req=['f-name','f-email','f-msg'].map(id=>document.getElementById(id));let ok=true;
     req.forEach(el=>{const bad=!el.value.trim()||(el.type==='email'&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(el.value));el.classList.toggle('bad',bad);if(bad)ok=false;});
     if(!ok){say('未入力の項目か、メールアドレスの形式を確認してください。','err');return;}
-    if(FORM_ID.startsWith('YOUR_')){say('送信先がまだ設定されていません。','err');return;}
     const d=Object.fromEntries(new FormData(f));
     btn.disabled=true;say('送信しています…');
-    try{const r=await fetch('https://formsubmit.co/ajax/'+FORM_ID,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},
-        body:JSON.stringify({_subject:'【ポートフォリオ】'+d.topic+'（'+d.name+' 様）',_template:'table',_replyto:d.email,
+    try{const r=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},
+        body:JSON.stringify({access_key:ACCESS_KEY,subject:'【ポートフォリオ】'+d.topic+'（'+d.name+' 様）',from_name:'Mitsuo Kazuhiro Portfolio',replyto:d.email,
           'お名前':d.name,'会社名':d.company||'-','メールアドレス':d.email,'ご相談の種類':d.topic,'ご相談内容':d.message})});
       const j=await r.json().catch(()=>({}));
-      if(r.ok&&String(j.success)!=='false'){f.reset();say('送信しました。内容を確認のうえ、ご返信します。','ok');}else throw 0;
+      if(r.ok&&j.success){f.reset();say('送信しました。内容を確認のうえ、ご返信します。','ok');}else throw 0;
     }catch(_){say('送信できませんでした。時間をおいてもう一度お試しください。','err');}
     finally{btn.disabled=false;}
   });
