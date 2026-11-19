@@ -108,6 +108,22 @@ nav .menu{padding:6px 26px;border-radius:99px;background:rgba(255,255,255,.72);b
 .qf-msg.ok{color:#14894B;font-weight:700}.qf-msg.err{color:#C93A3F;font-weight:700}
 @media (max-width:1000px){.hero-grid{grid-template-columns:1fr}.qform{max-width:520px}}
 @media (max-width:560px){.qf-row{grid-template-columns:1fr}}
+/* Phone tuning */
+@media (max-width:560px){
+  .hero{min-height:0}
+  .hero .wrap{padding-block:28px 96px}
+  .hero h1{font-size:clamp(30px,8.6vw,38px)!important;line-height:1.35}
+  .hero-art{opacity:.22!important}
+  .globe,.holo{display:none}
+  .hero p{font-size:14px}
+  .navcta{display:flex!important;padding:7px 14px;font-size:12px}
+  .brand span{font-size:12px}
+  .slider .cards{align-items:flex-start}
+  .card p{flex:none}
+  .proof a{flex:1;justify-content:center}
+  .band{padding-block:90px 80px}
+  .sh h2{font-size:21px}
+}
 /* slanted bands */
 .band{position:relative;margin-top:-60px;padding-block:110px 100px}
 .band::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#FFFFFF,var(--bg) 85%);clip-path:polygon(0 12%,100% 0,100% 88%,0 100%)}
