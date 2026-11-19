@@ -25,7 +25,7 @@ img{max-width:100%}
   color-scheme:light;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:88px}
 body{background:var(--bg);color:var(--fg);font-family:var(--jp);font-size:15px;line-height:1.85;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
@@ -42,7 +42,7 @@ main,nav,footer{position:relative;z-index:1}
 .btn:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offset:4px}
 
 /* NAV */
-nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;transition:background .3s,box-shadow .3s}
+nav{position:fixed;left:0;right:0;top:env(safe-area-inset-top,0px);z-index:30;transition:background .3s,box-shadow .3s}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:31;background:var(--bg)}
 nav.scrolled{background:rgba(255,255,255,.75);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);box-shadow:0 1px 0 var(--line),0 8px 24px rgba(30,70,160,.06)}
 nav .wrap{display:flex;align-items:center;justify-content:space-between;padding-block:16px;gap:20px}
@@ -58,7 +58,7 @@ nav .menu{padding:6px 26px;border-radius:99px;background:rgba(255,255,255,.72);b
 .navcta:hover{border-color:var(--blue);color:var(--blue);box-shadow:0 6px 20px rgba(47,107,255,.18)}
 
 /* HERO */
-.hero{position:relative;margin-top:-78px;padding-top:78px;min-height:540px;overflow:hidden;clip-path:polygon(0 0,100% 0,100% 88%,0 100%);
+.hero{position:relative;margin-top:0;padding-top:84px;min-height:540px;overflow:hidden;clip-path:polygon(0 0,100% 0,100% 88%,0 100%);
   background:radial-gradient(60% 70% at 15% 30%,#FFFFFF,transparent 70%),linear-gradient(160deg,#F9FBFF,#E6F0FF 60%,#DCE9FF)}
 .hero-art{z-index:1;position:absolute;right:0;top:0;width:66%;height:100%;
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 26%);mask-image:linear-gradient(90deg,transparent,#000 26%)}
@@ -407,7 +407,7 @@ footer .menu{gap:28px;font-size:13px}
     <div class="wrap">
     <div class="hero-copy">
       <h1 id="ttl"><span class="ln">AIの力で、</span><span class="ln">もっと便利で豊かな</span><span class="ln">社会をつくる</span></h1>
-      <p>現場の課題を見つけ、AIとITで解決する<br>エンジニアのポートフォリオです。</p>
+      <p>現場の課題を見つけ、<br>AIとITの力で業務改善を実現します。</p>
       <a class="btn" href="#works">実績を見る <span class="ar">→</span></a>
     </div>
   </div>
@@ -610,9 +610,6 @@ let d=.15;document.querySelectorAll('#ttl .ln').forEach(ln=>{ln.innerHTML=[...ln
     s.y-=s.v;if(s.y<-4){s.y=H+4;s.x=Math.random()*W}}if(!reduce)requestAnimationFrame(draw)}
   size();addEventListener('resize',size);reduce?draw(0):requestAnimationFrame(draw)})();
 
-/* hero parallax on pointer + scroll */
-const art=document.getElementById('heroArt');
-if(!reduce){addEventListener('pointermove',e=>{const dx=(e.clientX/innerWidth-.5),dy=(e.clientY/innerHeight-.5);art.style.transform=`translate(${dx*-18}px,${dy*-12}px)`;});}
 
 /* sticky nav state + active link */
 const nav=document.getElementById('nav'),links=[...document.querySelectorAll('nav .menu a')];
