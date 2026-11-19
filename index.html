@@ -108,6 +108,40 @@ nav .menu{padding:6px 26px;border-radius:99px;background:rgba(255,255,255,.72);b
 .qf-msg.ok{color:#14894B;font-weight:700}.qf-msg.err{color:#C93A3F;font-weight:700}
 @media (max-width:1000px){.hero-grid{grid-template-columns:1fr}.qform{max-width:520px}}
 @media (max-width:560px){.qf-row{grid-template-columns:1fr}}
+/* Works detail modal */
+.card{cursor:pointer}
+.card:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.more-d{margin-top:auto;padding-top:8px;font-size:12.5px;font-weight:700;color:var(--blue)}
+.card:hover .more-d{text-decoration:underline}
+.wm{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.wm-bg{position:absolute;inset:0;background:rgba(8,18,45,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);animation:wmf .3s both}
+.wm-panel{position:relative;width:min(760px,100%);max-height:calc(100dvh - 32px);overflow:auto;background:#fff;border-radius:22px;box-shadow:0 40px 100px rgba(10,30,90,.4);animation:wmu .4s cubic-bezier(.2,.9,.3,1.1) both}
+@keyframes wmf{from{opacity:0}}@keyframes wmu{from{opacity:0;transform:translateY(24px) scale(.97)}}
+.wm-x{position:absolute;right:14px;top:14px;z-index:2;width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.9);font-size:22px;line-height:1;cursor:pointer;color:var(--fg);box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.wm-x:hover{background:#fff;transform:rotate(90deg);transition:.25s}
+.wm-head{padding:26px 30px 22px;color:#fff;background:linear-gradient(135deg,#2F6BFF,#19B8E6)}
+.wm-head.c-vba{background:linear-gradient(135deg,#1D9A6C,#3CC7A0)}.wm-head.c-web{background:linear-gradient(135deg,#3A4FD8,#6D7CFF)}.wm-head.c-ai{background:linear-gradient(135deg,#6E4BF2,#B26BFF)}
+.wm-cat{display:inline-block;font-family:var(--en);font-size:12px;font-weight:600;background:rgba(255,255,255,.22);padding:3px 12px;border-radius:99px}
+.wm-head h3{margin:8px 50px 0 0;font-size:clamp(20px,2.6vw,26px);font-weight:900;line-height:1.4}
+.wm-body{padding:22px 30px 26px}
+.wm-vlabel{margin:22px 0 8px;font-size:13px;font-weight:900}
+.wm-video{position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#0B1A3A}
+.wm-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.wm-dl{margin:0;display:grid;gap:14px}
+.wm-dl>div{display:grid;grid-template-columns:110px 1fr;gap:14px;align-items:start}
+.wm-dl dt i{font-style:normal;display:inline-block;font-size:12px;font-weight:700;color:var(--blue);background:rgba(47,107,255,.1);padding:4px 10px;border-radius:8px}
+.wm-dl dd{margin:0;font-size:14.5px;line-height:1.9;color:var(--fg)}
+.wm-dl .eff dd{font-weight:700}
+.wm-dl .eff dt i{background:var(--blue);color:#fff}
+.wm-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.wm-links a{font-size:13px;font-weight:700;padding:9px 18px;border-radius:99px;border:1.5px solid var(--blue);color:var(--blue)}
+.wm-links a:hover{background:var(--blue);color:#fff}
+.wm-nav{display:flex;justify-content:space-between;gap:10px;margin-top:22px;padding-top:16px;border-top:1px solid var(--line)}
+.wm-nav button{font:700 13px var(--jp);border:0;background:none;color:var(--blue);cursor:pointer;padding:6px 4px}
+.wm-nav button[disabled]{opacity:.3;cursor:default}
+.wm-x:focus-visible,.wm-nav button:focus-visible,.wm-links a:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+body.wm-open{overflow:hidden}
+@media (max-width:560px){.wm-head{padding:22px 20px 18px}.wm-body{padding:18px 20px 22px}.wm-dl>div{grid-template-columns:1fr;gap:4px}}
 /* Strengths */
 .st-catch{margin:22px 0 0 22px;font-size:clamp(20px,2.4vw,28px);font-weight:900;line-height:1.5}
 .st-catch span{background:linear-gradient(90deg,var(--blue),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -468,57 +502,57 @@ footer .menu{gap:28px;font-size:13px}
       <button type="button" class="nav-arrow prev" id="wPrev" aria-label="前の実績へ">←</button>
       <button type="button" class="nav-arrow next" id="wNext" aria-label="次の実績へ">→</button>
     <div class="cards" id="cards">
-      <article class="card c-vba" data-cat="vba" style="--i:0">
+      <article class="card c-vba" data-cat="vba" style="--i:0" data-i="0" tabindex="0" role="button" aria-haspopup="dialog">
         <div class="th"><span class="cat">Excel VBA</span><svg viewBox="0 0 48 48"><rect x="7" y="9" width="34" height="30" rx="4"/><path d="M7 19h34M7 29h34M19 9v30M30 9v30"/></svg></div>
-        <div class="bd"><h3>発注管理アプリ</h3><p>発注から納品までの流れを、ひとつの画面でまとめて管理。</p></div>
+        <div class="bd"><h3>発注管理アプリ</h3><p>発注から納品までの流れを、ひとつの画面でまとめて管理。</p><span class="more-d">詳しく見る →</span></div>
       </article>
-      <article class="card c-vba" data-cat="vba" style="--i:1">
+      <article class="card c-vba" data-cat="vba" style="--i:1" data-i="1" tabindex="0" role="button" aria-haspopup="dialog">
         <div class="th"><span class="cat">Excel VBA</span><svg viewBox="0 0 48 48"><rect x="7" y="9" width="34" height="30" rx="4"/><path d="M7 19h34M7 29h34M19 9v30M30 9v30"/></svg></div>
-        <div class="bd"><h3>背表紙作成ツール</h3><p>一覧データからファイルの背表紙を自動で作成・印刷。</p></div>
+        <div class="bd"><h3>背表紙作成ツール</h3><p>一覧データからファイルの背表紙を自動で作成・印刷。</p><span class="more-d">詳しく見る →</span></div>
       </article>
-      <article class="card c-vba" data-cat="vba" style="--i:2">
+      <article class="card c-vba" data-cat="vba" style="--i:2" data-i="2" tabindex="0" role="button" aria-haspopup="dialog">
         <div class="th"><span class="cat">Excel VBA</span><svg viewBox="0 0 48 48"><rect x="7" y="9" width="34" height="30" rx="4"/><path d="M7 19h34M7 29h34M19 9v30M30 9v30"/></svg></div>
-        <div class="bd"><h3>転記・集計の自動化ツール</h3><p>複数のシートからの転記と集計を、ボタンひとつで完了。</p></div>
+        <div class="bd"><h3>転記・集計の自動化ツール</h3><p>複数のシートからの転記と集計を、ボタンひとつで完了。</p><span class="more-d">詳しく見る →</span></div>
       </article>
-      <article class="card c-vba" data-cat="vba" style="--i:3">
+      <article class="card c-vba" data-cat="vba" style="--i:3" data-i="3" tabindex="0" role="button" aria-haspopup="dialog">
         <div class="th"><span class="cat">Excel VBA</span><svg viewBox="0 0 48 48"><rect x="7" y="9" width="34" height="30" rx="4"/><path d="M7 19h34M7 29h34M19 9v30M30 9v30"/></svg></div>
-        <div class="bd"><h3>在庫管理アプリ</h3><p>入出庫を記録するだけで、在庫数と発注のタイミングがわかる。</p></div>
+        <div class="bd"><h3>在庫管理アプリ</h3><p>入出庫を記録するだけで、在庫数と発注のタイミングがわかる。</p><span class="more-d">詳しく見る →</span></div>
       </article>
-      <article class="card c-gas" data-cat="gas" style="--i:4">
+      <article class="card c-gas" data-cat="gas" style="--i:4" data-i="4" tabindex="0" role="button" aria-haspopup="dialog">
         <div class="th"><span class="cat">GAS</span><svg viewBox="0 0 48 48"><rect x="9" y="7" width="26" height="34" rx="4"/><path d="M15 16h14M15 23h14M15 30h8"/><path d="M38 22l-6 10h6l-4 9"/></svg></div>
-        <div class="bd"><h3>請求書の自動作成</h3><p>スプレッドシートの売上データから請求書PDFを自動で作成。</p></div>
+        <div class="bd"><h3>請求書の自動作成</h3><p>スプレッドシートの売上データから請求書PDFを自動で作成。</p><span class="more-d">詳しく見る →</span></div>
       </article>
-      <article class="card c-gas" data-cat="gas" style="--i:5">
+      <article class="card c-gas" data-cat="gas" style="--i:5" data-i="5" tabindex="0" role="button" aria-haspopup="dialog">
         <div class="th"><span class="cat">GAS</span><svg viewBox="0 0 48 48"><rect x="9" y="7" width="26" height="34" rx="4"/><path d="M15 16h14M15 23h14M15 30h8"/><path d="M38 22l-6 10h6l-4 9"/></svg></div>
-        <div class="bd"><h3>勤怠・給与計算システム</h3><p>打刻データの集計から給与計算までを自動化。</p></div>
+        <div class="bd"><h3>勤怠・給与計算システム</h3><p>打刻データの集計から給与計算までを自動化。</p><span class="more-d">詳しく見る →</span></div>
       </article>
-      <article class="card c-gas" data-cat="gas" style="--i:6">
+      <article class="card c-gas" data-cat="gas" style="--i:6" data-i="6" tabindex="0" role="button" aria-haspopup="dialog">
         <div class="th"><span class="cat">GAS</span><svg viewBox="0 0 48 48"><rect x="9" y="7" width="26" height="34" rx="4"/><path d="M15 16h14M15 23h14M15 30h8"/><path d="M38 22l-6 10h6l-4 9"/></svg></div>
-        <div class="bd"><h3>教室向け顧客管理アプリ</h3><p>生徒情報・契約・やり取りの履歴を一か所で管理。</p></div>
+        <div class="bd"><h3>教室向け顧客管理アプリ</h3><p>生徒情報・契約・やり取りの履歴を一か所で管理。</p><span class="more-d">詳しく見る →</span></div>
       </article>
-      <article class="card c-gas" data-cat="gas" style="--i:7">
+      <article class="card c-gas" data-cat="gas" style="--i:7" data-i="7" tabindex="0" role="button" aria-haspopup="dialog">
         <div class="th"><span class="cat">GAS</span><svg viewBox="0 0 48 48"><rect x="9" y="7" width="26" height="34" rx="4"/><path d="M15 16h14M15 23h14M15 30h8"/><path d="M38 22l-6 10h6l-4 9"/></svg></div>
-        <div class="bd"><h3>在庫管理アプリ</h3><p>スプレッドシートで入出庫と在庫数をリアルタイムに共有。</p></div>
+        <div class="bd"><h3>在庫管理アプリ</h3><p>スプレッドシートで入出庫と在庫数をリアルタイムに共有。</p><span class="more-d">詳しく見る →</span></div>
       </article>
-      <article class="card c-gas" data-cat="gas" style="--i:8">
+      <article class="card c-gas" data-cat="gas" style="--i:8" data-i="8" tabindex="0" role="button" aria-haspopup="dialog">
         <div class="th"><span class="cat">GAS</span><svg viewBox="0 0 48 48"><rect x="9" y="7" width="26" height="34" rx="4"/><path d="M15 16h14M15 23h14M15 30h8"/><path d="M38 22l-6 10h6l-4 9"/></svg></div>
-        <div class="bd"><h3>LINE連携の予約申請アプリ</h3><p>LINEから予約を申請し、管理者へ自動で通知。</p><div class="stack">GAS / LINE API</div></div>
+        <div class="bd"><h3>LINE連携の予約申請アプリ</h3><p>LINEから予約を申請し、管理者へ自動で通知。</p><div class="stack">GAS / LINE API</div><span class="more-d">詳しく見る →</span></div>
       </article>
-      <article class="card c-ai" data-cat="ai" style="--i:9">
+      <article class="card c-ai" data-cat="ai" style="--i:9" data-i="9" tabindex="0" role="button" aria-haspopup="dialog">
         <div class="th"><span class="cat">AI活用</span><svg viewBox="0 0 48 48"><path d="M24 6l3.6 10.4L38 20l-10.4 3.6L24 34l-3.6-10.4L10 20l10.4-3.6z"/><path d="M37 30l1.6 4.4L43 36l-4.4 1.6L37 42l-1.6-4.4L31 36l4.4-1.6z"/></svg></div>
-        <div class="bd"><h3>AI口コミ作成アプリ</h3><p>アンケートに答えるだけで、AIが口コミ文を作成しGoogleへ投稿。回答にない内容は書かせない設計。</p><div class="stack">Next.js / Claude API / Vercel</div><div class="lk"><a href="https://youtu.be/UNKvDsn4p_U" target="_blank" rel="noopener">デモ動画 ↗</a><a href="https://dejihaku-kadai1-kutikomisysytem.vercel.app/" target="_blank" rel="noopener">アプリ ↗</a></div></div>
+        <div class="bd"><h3>AI口コミ作成アプリ</h3><p>アンケートに答えるだけで、AIが口コミ文を作成しGoogleへ投稿。回答にない内容は書かせない設計。</p><div class="stack">Next.js / Claude API / Vercel</div><span class="more-d">詳しく見る →</span></div>
       </article>
-      <article class="card c-web" data-cat="web" style="--i:10">
+      <article class="card c-web" data-cat="web" style="--i:10" data-i="10" tabindex="0" role="button" aria-haspopup="dialog">
         <div class="th"><span class="cat">Webアプリ</span><svg viewBox="0 0 48 48"><rect x="6" y="9" width="36" height="28" rx="4"/><path d="M6 17h36M12 13h.1M17 13h.1M22 13h.1M16 41h16"/></svg></div>
-        <div class="bd"><h3>経費按分システム</h3><p>カード利用データを読み込み、部署ごとの経費按分を自動で集計。ログインと権限別の画面つき。</p><div class="stack">Python / SQLite / Streamlit</div><div class="lk"><a href="https://youtu.be/ZbxTJpEIuNQ" target="_blank" rel="noopener">解説動画 ↗</a><a href="https://mitsuo1206-dejihaku-kadai2-gasolineambunnsyuukei-app-jv8s2w.streamlit.app/" target="_blank" rel="noopener">アプリ ↗</a></div></div>
+        <div class="bd"><h3>経費按分システム</h3><p>カード利用データを読み込み、部署ごとの経費按分を自動で集計。ログインと権限別の画面つき。</p><div class="stack">Python / SQLite / Streamlit</div><span class="more-d">詳しく見る →</span></div>
       </article>
-      <article class="card c-ai" data-cat="ai" style="--i:11">
+      <article class="card c-ai" data-cat="ai" style="--i:11" data-i="11" tabindex="0" role="button" aria-haspopup="dialog">
         <div class="th"><span class="cat">AI活用</span><svg viewBox="0 0 48 48"><path d="M24 6l3.6 10.4L38 20l-10.4 3.6L24 34l-3.6-10.4L10 20l10.4-3.6z"/><path d="M37 30l1.6 4.4L43 36l-4.4 1.6L37 42l-1.6-4.4L31 36l4.4-1.6z"/></svg></div>
-        <div class="bd"><h3>AI会議アシスタント</h3><p>商談中に出た専門的な質問へ、その場で回答案を作成。</p><div class="stack">生成AI</div><div class="lk"><a href="https://youtu.be/tO1Qw8aNb_8" target="_blank" rel="noopener">解説動画 ↗</a></div></div>
+        <div class="bd"><h3>AI会議アシスタント</h3><p>商談中に出た専門的な質問へ、その場で回答案を作成。</p><div class="stack">生成AI</div><span class="more-d">詳しく見る →</span></div>
       </article>
-      <article class="card c-ai" data-cat="ai" style="--i:12">
+      <article class="card c-ai" data-cat="ai" style="--i:12" data-i="12" tabindex="0" role="button" aria-haspopup="dialog">
         <div class="th"><span class="cat">AI活用</span><svg viewBox="0 0 48 48"><path d="M24 6l3.6 10.4L38 20l-10.4 3.6L24 34l-3.6-10.4L10 20l10.4-3.6z"/><path d="M37 30l1.6 4.4L43 36l-4.4 1.6L37 42l-1.6-4.4L31 36l4.4-1.6z"/></svg></div>
-        <div class="bd"><h3>AI動画生成システム</h3><p>商品紹介や研修の動画を低コストで量産できる仕組み。</p><div class="stack">生成AI</div><div class="lk"><a href="https://youtu.be/5_V1CX0VNN4" target="_blank" rel="noopener">解説動画 ↗</a></div></div>
+        <div class="bd"><h3>AI動画生成システム</h3><p>商品紹介や研修の動画を低コストで量産できる仕組み。</p><div class="stack">生成AI</div><span class="more-d">詳しく見る →</span></div>
       </article>
     </div>
     <div class="progress"><span id="wBar"></span></div>
@@ -583,6 +617,27 @@ footer .menu{gap:28px;font-size:13px}
   </div>
 </div></section>
 </main>
+<div class="wm" id="wm" hidden>
+  <div class="wm-bg" data-close></div>
+  <div class="wm-panel" role="dialog" aria-modal="true" aria-labelledby="wm-title">
+    <button type="button" class="wm-x" data-close aria-label="閉じる">×</button>
+    <div class="wm-head" id="wm-head"><span class="wm-cat" id="wm-cat"></span><h3 id="wm-title"></h3></div>
+    <div class="wm-body">
+      <dl class="wm-dl">
+        <div><dt><i>課題</i></dt><dd id="wm-issue"></dd></div>
+        <div><dt><i>作ったもの</i></dt><dd id="wm-made"></dd></div>
+        <div><dt><i>工夫したこと</i></dt><dd id="wm-point"></dd></div>
+        <div class="eff"><dt><i>効果</i></dt><dd id="wm-effect"></dd></div>
+        <div><dt><i>使った技術</i></dt><dd id="wm-tech"></dd></div>
+      </dl>
+      <p class="wm-vlabel" id="wm-vlabel" hidden>デモ動画</p>
+      <div class="wm-video" id="wm-video" hidden></div>
+      <div class="wm-links" id="wm-links"></div>
+      <div class="wm-nav"><button type="button" id="wm-prev">← 前の実績</button><button type="button" id="wm-next">次の実績 →</button></div>
+    </div>
+  </div>
+</div>
+
 
 <footer><div class="wrap">
   <a class="brand" href="#home"><svg viewBox="0 0 46 30" aria-hidden="true"><path d="M2 28 L12 2 L23 18 L34 2 L44 28 L36 28 L31 14 L23 26 L15 14 L10 28 Z" fill="url(#lg)"/></svg><span>Mitsuo Kazuhiro Portfolio</span></a>
@@ -675,6 +730,27 @@ document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('clic
   const io2=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;io2.unobserve(e.target);const el=e.target,to=+el.dataset.count;let st;
     const step=t=>{st??=t;const k=Math.min(1,(t-st)/1400);el.textContent=Math.round(to*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(step)};requestAnimationFrame(step);}),{threshold:.4});
   els.forEach(el=>io2.observe(el));})();
+
+/* Works detail modal */
+(function(){const D=[{"issue": "備品の発注は、在庫の確認、発注メールの作成、上長や納品担当への連絡まで、すべて手作業でした。担当者によってやり方がばらつき、連絡漏れも起きやすい状態でした。", "made": "Excelの画面でボタンを押すだけで、発注メールの送信、発注ステータスの更新、上長・納品担当への連絡までを自動で行うツールです。", "point": "発注担当者や現場リーダーと実際の流れで検証を重ね、使いにくい点をその都度直しながら仕上げました。完成後は部署全体へ使い方を説明しました。", "effect": "発注にかかる手間と連絡漏れを減らし、部署全体で今も継続して使われています。", "tech": "Excel VBA / Outlook連携"}, {"issue": "ファイルの背表紙を、一覧を見ながら1枚ずつ手作業で作成・印刷していました。", "made": "一覧データを読み込み、決まったレイアウトで背表紙を自動作成して印刷できるツールです。", "point": "社内勉強会をきっかけに相談を受けて作成しました。品質保証の担当者からのフィードバックを受けて作り直し、運用に合う形に改善しました。", "effect": "背表紙づくりの手作業と入力ミスをなくしました。", "tech": "Excel VBA"}, {"issue": "別のファイルからの転記や、台帳を見ながらの集計・手入力に、多くの時間がかかっていました。", "made": "元データを読み込み、必要な列へ自動で転記・集計するツールです。ボタンひとつで処理が終わります。", "point": "現場の方に作業内容を聞き取り、生成AIを使って短時間で形にしました。1週間以上かかっていた転記業務の依頼には、約20分でツールを作って対応しました。", "effect": "毎月約100行を手入力していた在庫数の記入（約30分）が、ワンクリック約1秒に。転記の依頼が来てもボタンひとつで終わる状態になりました。", "tech": "Excel VBA / 生成AI"}, {"issue": "在庫の数量や保管場所を、部署ごとにばらばらの方法で管理していて、状況の把握に時間がかかっていました。", "made": "入出庫を記録するだけで、現在の在庫数がわかる在庫管理アプリです。", "point": "社内の正式な依頼を受けて開発しました。現場リーダーとの週次の打ち合わせで仕様を固め、完成後は複数の建屋・部署へ展開して運用までつなげました。", "effect": "在庫の状況をすぐに確認できるようになり、複数の部署で運用されています。", "tech": "Excel VBA"}, {"issue": "毎月の請求書を、売上の記録を見ながら1件ずつ作成していました。", "made": "スプレッドシートの売上データから、請求書のPDFを自動で作成する仕組みです。", "point": "打ち合わせで実際の作り方を聞き取り、試作を触ってもらいながら修正を重ねて仕上げました。", "effect": "請求書づくりの手作業と転記ミスを減らしました。", "tech": "Google Apps Script / スプレッドシート"}, {"issue": "出勤・退勤の記録を集め、手作業で集計して給与を計算していました。", "made": "打刻データの集計から給与計算までを自動で行うシステムです。", "point": "毎回の打ち合わせで要望を聞き取り、検証と修正を繰り返して作りました。毎日使ってもらう仕組みなので、入力の手間をできるだけ少なくすることを意識しました。", "effect": "月末の集計と給与計算の手間を減らしました。", "tech": "Google Apps Script / スプレッドシート"}, {"issue": "生徒の情報や契約内容、やり取りの記録が、紙やファイルに分かれていました。", "made": "生徒情報・契約・連絡の履歴を、一か所で管理できるアプリです。", "point": "教室の運営の流れを聞き取り、必要な項目だけに絞って、誰でも迷わず使える画面にしました。", "effect": "必要な情報をすぐに探せるようになりました。", "tech": "Google Apps Script / スプレッドシート"}, {"issue": "在庫の数量を手作業で記録していて、複数人で最新の状況を共有しにくい状態でした。", "made": "スプレッドシート上で入出庫を記録し、在庫数を自動で計算して共有できるアプリです。", "point": "使う人の作業の流れに合わせて、入力の画面と手順をシンプルにしました。", "effect": "複数人が同じ在庫状況をリアルタイムで確認できるようになりました。", "tech": "Google Apps Script / スプレッドシート"}, {"issue": "予約の申請を電話やメッセージで受け付けていて、管理者が内容を確認・記録する手間がかかっていました。", "made": "LINEから予約を申請でき、内容が自動で記録され、管理者へ通知が届く仕組みです。", "point": "お客様がふだん使っているLINEから申請できるようにし、申請する側の手間を減らしました。", "effect": "予約の受付と記録が自動になり、確認漏れを減らしました。", "tech": "Google Apps Script / LINE Messaging API"}, {"issue": "飲食店では、満足したお客様がいても口コミを書いてもらうのは難しく、口コミが集まりにくいという悩みがありました。", "made": "お客様がアンケートに答えるだけで、AIが口コミ文を作り、そのままGoogleに投稿できるアプリです。", "point": "アンケートの回答にない内容はAIに書かせないようにしました。また、毎回口調を変えて、人が書いたような自然な文章にしています。Claude Codeで開発し、操作をレビューするための指示書（CLAUDE.md）も用意しました。", "effect": "お客様の手間を「答えるだけ」に減らし、口コミを投稿してもらいやすくしました。", "tech": "Next.js / Claude API / Vercel / Claude Code", "video": "UNKvDsn4p_U", "links": [["アプリを開く", "https://dejihaku-kadai1-kutikomisysytem.vercel.app/"]]}, {"issue": "ガソリンカードの利用明細を、部署ごとに手作業で集計・按分していて、時間がかかりミスも起きやすい状態でした。", "made": "利用データを読み込むだけで、部署ごとの按分を自動で集計するシステムです。ログイン機能と、権限ごとに表示を分けた画面を備えています。", "point": "権限に応じて見られる情報を分けました。カード番号のような重要な情報は、一部を伏せて表示するなど、情報漏えいを防ぐ設計を意識しています。", "effect": "集計・按分の作業を自動化し、手作業によるミスを減らしました。", "tech": "Python / SQLite / Streamlit", "video": "ZbxTJpEIuNQ", "links": [["アプリを開く", "https://mitsuo1206-dejihaku-kadai2-gasolineambunnsyuukei-app-jv8s2w.streamlit.app/"]]}, {"issue": "商談中に、技術や専門分野の質問をされても、その場ですぐに答えられないことがあります。", "made": "商談中に出た専門的な質問に対して、その場で回答案を作るAIアシスタントです。", "point": "会話の流れに沿って、すぐに使える回答を素早く出すことに着目して作りました。", "effect": "専門的な質問にも、その場で根拠のある回答を返しやすくなります。", "tech": "生成AI", "video": "tO1Qw8aNb_8"}, {"issue": "動画は効果的ですが、制作費がかかるため「この商品は動画にするほどではない」「研修動画は年1回しか更新できない」と諦めることが多くありました。", "made": "商品紹介や研修などの動画を、低コストで作れるAI動画生成の仕組みです。", "point": "「動画を作るかどうか」を費用で悩まなくてよくなることを目指しました。", "effect": "動画の数を増やせるので、どの動画が効果的かを試しながら改善できるようになります。", "tech": "生成AI", "video": "5_V1CX0VNN4"}];
+  const m=document.getElementById('wm'),$=id=>document.getElementById(id),cards=[...document.querySelectorAll('#cards .card')];let cur=-1,last=null;
+  const vis=()=>cards.filter(c=>!c.classList.contains('hide'));
+  function open(i){const c=cards[i],d=D[i];cur=i;
+    $('wm-head').className='wm-head c-'+c.dataset.cat;$('wm-cat').textContent=c.querySelector('.cat').textContent;$('wm-title').textContent=c.querySelector('h3').textContent;
+    ['issue','made','point','effect','tech'].forEach(k=>$('wm-'+k).textContent=d[k]||'');
+    const v=$('wm-video');v.innerHTML='';v.hidden=!d.video;$('wm-vlabel').hidden=!d.video;
+    if(d.video){const f=document.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+d.video;f.title='デモ動画';f.loading='lazy';f.allow='accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen';f.allowFullscreen=true;v.appendChild(f);}
+    const L=$('wm-links');L.innerHTML='';(d.links||[]).concat(d.video?[['YouTubeで見る','https://youtu.be/'+d.video]]:[]).forEach(([n,u])=>{const a=document.createElement('a');a.href=u;a.target='_blank';a.rel='noopener';a.textContent=n+' ↗';L.appendChild(a);});
+    const vv=vis(),p=vv.indexOf(c);$('wm-prev').disabled=p<=0;$('wm-next').disabled=p>=vv.length-1;
+    if(m.hidden){last=document.activeElement;m.hidden=false;document.body.classList.add('wm-open');}
+    m.querySelector('.wm-panel').scrollTop=0;m.querySelector('.wm-x').focus();}
+  function close(){m.hidden=true;$('wm-video').innerHTML='';document.body.classList.remove('wm-open');if(last)last.focus();}
+  function step(k){const vv=vis(),p=vv.indexOf(cards[cur])+k;if(vv[p])open(cards.indexOf(vv[p]));}
+  cards.forEach((c,i)=>{c.addEventListener('click',()=>open(i));c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open(i);}});});
+  m.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',close));
+  $('wm-prev').addEventListener('click',()=>step(-1));$('wm-next').addEventListener('click',()=>step(1));
+  addEventListener('keydown',e=>{if(m.hidden)return;if(e.key==='Escape')close();if(e.key==='ArrowRight')step(1);if(e.key==='ArrowLeft')step(-1);});
+})();
 </script>
 </body>
 </html>
