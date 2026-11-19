@@ -108,6 +108,46 @@ nav .menu{padding:6px 26px;border-radius:99px;background:rgba(255,255,255,.72);b
 .qf-msg.ok{color:#14894B;font-weight:700}.qf-msg.err{color:#C93A3F;font-weight:700}
 @media (max-width:1000px){.hero-grid{grid-template-columns:1fr}.qform{max-width:520px}}
 @media (max-width:560px){.qf-row{grid-template-columns:1fr}}
+/* Strengths */
+.st-catch{margin:22px 0 0 22px;font-size:clamp(20px,2.4vw,28px);font-weight:900;line-height:1.5}
+.st-catch span{background:linear-gradient(90deg,var(--blue),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+.st-top{display:grid;grid-template-columns:1.05fr 1fr;gap:18px;margin-top:32px}
+.coco{position:relative;overflow:hidden;border-radius:24px;padding:28px 30px;color:#fff;background:linear-gradient(135deg,#2F6BFF,#6E4BF2 70%,#9B5CFF);box-shadow:0 24px 60px rgba(70,90,255,.32);display:flex;flex-direction:column;gap:6px;transition:transform .35s,box-shadow .35s;isolation:isolate}
+.coco::before{content:"";position:absolute;width:320px;height:320px;border-radius:50%;right:-90px;top:-120px;background:rgba(255,255,255,.14);z-index:-1}
+.coco::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 40%,rgba(255,255,255,.22) 50%,transparent 60%);background-size:250% 100%;animation:sheen 4.5s ease-in-out infinite;z-index:-1}
+@keyframes sheen{0%,40%{background-position:120% 0}100%{background-position:-120% 0}}
+.coco:hover{transform:translateY(-4px);box-shadow:0 30px 70px rgba(70,90,255,.42)}
+.coco-tag{align-self:flex-start;font-size:12px;font-weight:700;background:rgba(255,255,255,.2);padding:4px 12px;border-radius:99px}
+.coco-num{display:flex;align-items:baseline;gap:6px;margin-top:6px}
+.coco-num b{font-family:var(--en);font-size:clamp(72px,9vw,112px);font-weight:700;line-height:.9;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.coco-num small{font-size:24px;font-weight:900}
+.coco-ttl{margin:4px 0 0;font-size:18px;font-weight:900}
+.coco-txt{margin:6px 0 0;font-size:13.5px;line-height:1.85;opacity:.92;max-width:34em}
+.coco-link{margin-top:auto;padding-top:14px;font-size:13px;font-weight:700}
+.stats{display:grid;gap:12px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 22px;box-shadow:0 8px 22px rgba(30,70,160,.07);display:grid;gap:2px}
+.st-l{font-size:12px;font-weight:700;color:var(--dim)}
+.st-v{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.st-v s{font-size:15px;color:var(--dim);text-decoration-color:rgba(91,107,140,.6)}
+.st-v i{font-style:normal;color:var(--blue);font-weight:700}
+.st-v b{font-family:var(--en);font-size:30px;font-weight:700;color:var(--blue);line-height:1.2;font-variant-numeric:tabular-nums}
+.st-v em{font-style:normal;font-weight:900;font-size:16px;color:var(--blue)}
+.st-s{font-size:12px;color:var(--dim)}
+.st-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
+.st-card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 22px 20px;box-shadow:0 8px 22px rgba(30,70,160,.07);overflow:hidden;transition:transform .35s,box-shadow .35s}
+.st-card:hover{transform:translateY(-5px);box-shadow:0 16px 36px rgba(47,107,255,.16)}
+.st-no{position:absolute;right:16px;top:10px;font-family:var(--en);font-size:32px;line-height:1;font-weight:700;color:transparent;-webkit-text-stroke:1px rgba(47,107,255,.25)}
+.st-card h3{margin:0 0 8px;padding-right:52px;font-size:16px;font-weight:900}
+.st-card p{margin:0;font-size:13px;color:var(--dim);line-height:1.85}
+.st-job{margin-top:18px;background:linear-gradient(135deg,#fff,#EEF4FF);border:1px solid var(--line);border-radius:22px;padding:24px 28px}
+.st-job h3{margin:0 0 14px;font-size:16px;font-weight:900;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.st-job h3 small{font-size:12px;font-weight:500;color:var(--dim)}
+.st-job ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px 28px}
+.st-job li{position:relative;padding-left:18px;font-size:13px;color:var(--dim);line-height:1.75}
+.st-job li::before{content:"";position:absolute;left:0;top:.7em;width:7px;height:7px;border-radius:50%;background:var(--blue)}
+.st-job li b{display:block;color:var(--fg);font-size:14px}
+@media (max-width:1000px){.st-top{grid-template-columns:1fr}.st-cards{grid-template-columns:1fr}.st-job ul{grid-template-columns:1fr}}
+@media (max-width:560px){.st-catch{margin-left:0}.coco{padding:24px}.st-job{padding:20px}}
 /* Process */
 .pr-lead{display:grid;grid-template-columns:auto 1fr;gap:20px 48px;align-items:center;margin:26px 0 0 22px}
 .pr-catch{margin:0;font-size:clamp(22px,2.6vw,32px);font-weight:900;line-height:1.5;letter-spacing:.02em}
@@ -354,7 +394,7 @@ footer .menu{gap:28px;font-size:13px}
     <svg viewBox="0 0 46 30" aria-hidden="true"><defs><linearGradient id="lg" x1="0" x2="1"><stop offset="0" stop-color="#19B8E6"/><stop offset="1" stop-color="#2F6BFF"/></linearGradient></defs><path d="M2 28 L12 2 L23 18 L34 2 L44 28 L36 28 L31 14 L23 26 L15 14 L10 28 Z" fill="url(#lg)"/></svg>
     <span>Mitsuo Kazuhiro<br>Portfolio</span>
   </a>
-  <div class="menu"><a class="on" href="#home">Home</a><a href="#works">Works</a><a href="#process">Process</a><a href="#about">About</a><a href="#contact">Contact</a></div>
+  <div class="menu"><a class="on" href="#home">Home</a><a href="#strengths">Strengths</a><a href="#works">Works</a><a href="#process">Process</a><a href="#about">About</a><a href="#contact">Contact</a></div>
   <a class="navcta" href="#contact">お問い合わせ <span>→</span></a>
 </div></nav>
 
@@ -372,6 +412,47 @@ footer .menu{gap:28px;font-size:13px}
   </div>
 </header>
 
+<section class="band" id="strengths"><div class="beam"></div><div class="wrap">
+  <div class="rv">
+    <div class="sh"><div class="bar"></div><div><div class="en">Strengths</div><h2>私の強み</h2></div></div>
+    <p class="st-catch">「作れる」だけで終わらせず、<span>現場で使われる</span>ところまで。</p>
+
+    <div class="st-top">
+      <a class="coco" href="https://coconala.com/users/4803067" target="_blank" rel="noopener">
+        <span class="coco-tag">副業・ココナラ</span>
+        <div class="coco-num"><b data-count="30">30</b><small>件</small></div>
+        <p class="coco-ttl">業務効率化の開発実績</p>
+        <p class="coco-txt">GAS・Excel・生成AIを使った自動化やアプリ開発のご依頼に対応。要望を素早く形にし、修正を重ねて仕上げる対応で、継続してご依頼をいただいています。</p>
+        <span class="coco-link">ココナラのプロフィールを見る ↗</span>
+      </a>
+      <div class="stats">
+        <div class="stat"><span class="st-l">在庫数の計算</span><div class="st-v"><s>約30分</s><i>→</i><b>約1秒</b></div><span class="st-s">毎月の手入力をワンクリックに</span></div>
+        <div class="stat"><span class="st-l">転記業務の自動化</span><div class="st-v"><s>1週間以上</s><i>→</i><b>約20分</b></div><span class="st-s">生成AIで自動化ツールを構築</span></div>
+        <div class="stat"><span class="st-l">社内勉強会</span><div class="st-v"><b data-count="20">20</b><em>名</em></div><span class="st-s">管理職を含む複数部署が受講</span></div>
+      </div>
+    </div>
+
+    <div class="st-cards">
+      <div class="st-card"><span class="st-no">01</span><h3>現場の業務がわかる</h3><p>メーカーの資材管理部門で働きながら、自ら業務改善ツールを開発しています。使う人の立場で、本当に困っているところを見つけられます。</p></div>
+      <div class="st-card"><span class="st-no">02</span><h3>聞き取りから運用まで一人で</h3><p>課題のヒアリング、仕様の調整、開発、現場への展開、使い方の説明、本番運用まで一貫して担当します。</p></div>
+      <div class="st-card"><span class="st-no">03</span><h3>AIで速く作り、教えられる</h3><p>生成AIを使って短期間で形にします。社内ではExcel VBA×生成AIの勉強会を企画し、講師も務めました。</p></div>
+    </div>
+
+    <div class="st-job">
+      <h3>本業での主な実績 <small>メーカーの資材管理部門</small></h3>
+      <ul>
+        <li><b>在庫管理アプリ</b>社内の正式な依頼を受け、週次の打ち合わせで仕様を固めて開発。複数の建屋・部署へ展開し、運用中</li>
+        <li><b>備品の発注業務を自動化</b>発注メールの送信、ステータス更新、上長・納品の連絡をボタン操作に。部署全体で継続運用中</li>
+        <li><b>在庫数の計算を自動化</b>台帳から毎月約100行を手入力していた作業（約30分）を、ワンクリック約1秒に</li>
+        <li><b>ピッキングリスト集計（Python）</b>形式の違う複数のリストをまとめて集計。約1週間で構築し、実運用へ</li>
+        <li><b>更新の自動通知（Power Automate）</b>スケジュール表が更新されると、翌日にTeamsへ自動で通知</li>
+        <li><b>社内勉強会の講師</b>Excel VBA×生成AIの勉強会を自主企画。資料作成・動画収録・講義まで担当し、約20名が受講</li>
+        <li><b>他部署の業務改善を支援</b>受講者や他チームの相談に対応。新人へのマンツーマン支援で、データ加工の自動化を本番運用へ</li>
+        <li><b>5S委員（デジタル分野）</b>これまでの取り組みが評価され、デジタル分野の担当として任命</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
 <section class="band" id="works"><div class="beam"></div><div class="wrap">
   <div class="rv">
     <div class="works-head">
@@ -510,7 +591,7 @@ footer .menu{gap:28px;font-size:13px}
 
 <footer><div class="wrap">
   <a class="brand" href="#home"><svg viewBox="0 0 46 30" aria-hidden="true"><path d="M2 28 L12 2 L23 18 L34 2 L44 28 L36 28 L31 14 L23 26 L15 14 L10 28 Z" fill="url(#lg)"/></svg><span>Mitsuo Kazuhiro Portfolio</span></a>
-  <div class="menu"><a class="on" href="#home">Home</a><a href="#works">Works</a><a href="#process">Process</a><a href="#about">About</a><a href="#contact">Contact</a></div>
+  <div class="menu"><a class="on" href="#home">Home</a><a href="#strengths">Strengths</a><a href="#works">Works</a><a href="#process">Process</a><a href="#about">About</a><a href="#contact">Contact</a></div>
   <div class="social">
     <a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5Z"/></svg></a>
     <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.4 2H3.6A1.6 1.6 0 0 0 2 3.6v16.8A1.6 1.6 0 0 0 3.6 22h16.8a1.6 1.6 0 0 0 1.6-1.6V3.6A1.6 1.6 0 0 0 20.4 2ZM8 19H5V9.5h3V19ZM6.5 8.2a1.7 1.7 0 1 1 0-3.5 1.7 1.7 0 0 1 0 3.5ZM19 19h-3v-4.6c0-1.1 0-2.5-1.5-2.5s-1.8 1.2-1.8 2.4V19h-3V9.5h2.9v1.3a3.2 3.2 0 0 1 2.9-1.6c3 0 3.6 2 3.6 4.6V19Z"/></svg></a>
@@ -596,6 +677,12 @@ document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('clic
   document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{t.scrollLeft=0;setTimeout(upd,50);}));
   upd();
 })();
+
+/* Count-up for highlighted numbers */
+(function(){if(reduce)return;const els=document.querySelectorAll('[data-count]');
+  const io2=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;io2.unobserve(e.target);const el=e.target,to=+el.dataset.count;let st;
+    const step=t=>{st??=t;const k=Math.min(1,(t-st)/1400);el.textContent=Math.round(to*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(step)};requestAnimationFrame(step);}),{threshold:.4});
+  els.forEach(el=>io2.observe(el));})();
 </script>
 </body>
 </html>
