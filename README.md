@@ -10,7 +10,6 @@ Excel VBA・GAS・生成AIで現場の業務を効率化するエンジニアの
 | `index.html` | ページ本体（HTML・CSS・JavaScript を1ファイルにまとめています） |
 | `img/hero.jpg` | ファーストビューのイラスト |
 | `img/about.jpg` | About の背景イラスト |
-| `img/me.jpg` | About に表示するプロフィール写真 |
 
 ## 公開前にやること
 
